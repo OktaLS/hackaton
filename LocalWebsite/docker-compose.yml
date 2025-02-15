@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

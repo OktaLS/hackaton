@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loginDiv">
+        <h2>Customer Login</h2>
+        <input type="text" id="seatInput" placeholder="Enter Seat Number">
+        <label for="languageSelect">Select Language:</label>
+        <select id="languageSelect">
+            <option value="en" selected>English</option>
+            <option value="es">Spanish</option>
+            <option value="fr">French</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+        </select>
+        <button id="loginBtn">Login</button>
+    </div>
+
+    <div id="customerPanel" style="display:none;">
+        <h2>Pilot Announcements</h2>
+        <div id="announcementArea" style="border:1px solid #000; height:150px;"></div>
+
+        <h2>Chat with Staff</h2>
+        <div id="chatBox" style="border:1px solid #000; height:300px; overflow-y:scroll; margin:10px 0;"></div>
+        <input type="text" id="messageInput" placeholder="Type your message">
+        <button id="sendBtn">Send</button>
+    </div>
+
+    <!-- Socket.IO client -->
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
