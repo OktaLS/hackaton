@@ -23,11 +23,14 @@
             <option value="it">Italian</option>
         </select>
         <br>
-        <button id="pttBtn">Start Vocal Announce</button>
+        <label for="targetSeatInput">Target Seat:</label>
+        <input type="number" id="targetSeatInput" placeholder="Enter target seat number">
+        <br>
+        <label for="messageInput">Message:</label>
+        <input type="text" id="messageInput" placeholder="Type your message">
+        <button id="sendBtn">Send Message</button>
     </div>
 
-    <!-- Socket.IO client -->
-    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

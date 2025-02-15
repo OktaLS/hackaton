@@ -22,3 +22,16 @@ Il inclut :
 2. Dans le dossier racine `LocalWebsite/`, lancez :
    ```bash
    docker-compose up --build
+
+Accéder aux interfaces
+Ouvrez votre navigateur et rendez-vous sur :
+
+    http://localhost:3000/pilot/ pour le pilote.
+    http://localhost:3000/staff/ pour le staff.
+    http://localhost:3000/customer/ pour le client.
+
+Tester les fonctionnalités
+
+    Pour le pilote : Connectez-vous (mot de passe 42), sélectionnez la langue et testez le bouton push-to-talk.
+    Pour le staff : Connectez-vous (mot de passe 41), sélectionnez la langue et envoyez/récupérez des messages.
+    Pour le client : Entrez un numéro de siège, choisissez la langue, recevez les annonces vocales et utilisez le chat.

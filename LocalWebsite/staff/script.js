@@ -3,8 +3,7 @@ document.getElementById('loginBtn').addEventListener('click', function(){
     if(password === "41"){
         document.getElementById('loginDiv').style.display = 'none';
         document.getElementById('chatPanel').style.display = 'block';
-        fetchMessages();
-        // Rafraîchissement des messages toutes les 2 secondes
+        // Lancement du rafraîchissement des messages toutes les 2 secondes
         setInterval(fetchMessages, 2000);
     } else {
         alert("Incorrect password!");
@@ -14,7 +13,18 @@ document.getElementById('loginBtn').addEventListener('click', function(){
 document.getElementById('sendBtn').addEventListener('click', function(){
     const messageContent = document.getElementById('messageInput').value;
     const language = document.getElementById('languageSelect').value;
-    const message = { role: 'staff', content: messageContent, language: language, timestamp: new Date() };
+    const targetSeat = document.getElementById('targetSeatInput').value;
+    if(!targetSeat){
+        alert("Please enter a target customer seat number");
+        return;
+    }
+    const message = { 
+        role: 'staff', 
+        content: messageContent, 
+        language: language, 
+        targetSeat: targetSeat, 
+        timestamp: new Date() 
+    };
     fetch("http://localhost:3001/api/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -27,14 +37,23 @@ document.getElementById('sendBtn').addEventListener('click', function(){
 
 function fetchMessages(){
     const language = document.getElementById('languageSelect').value;
-    fetch(`http://localhost:3001/api/messages?targetLanguage=${language}`)
+    const targetSeat = document.getElementById('targetSeatInput').value;
+    if(!targetSeat){
+        document.getElementById('chatBox').innerHTML = "";
+        return;
+    }
+    fetch(`http://localhost:3001/api/messages?targetLanguage=${language}&seat=${targetSeat}`)
     .then(res => res.json())
     .then(messages => {
         const chatBox = document.getElementById('chatBox');
         chatBox.innerHTML = "";
         messages.forEach(msg => {
             const msgDiv = document.createElement('div');
-            msgDiv.textContent = `[${msg.role}] ${msg.content}`;
+            if(msg.role === 'customer'){
+                msgDiv.textContent = `[Seat ${msg.seat}] ${msg.content}`;
+            } else {
+                msgDiv.textContent = `[${msg.role}] ${msg.content}`;
+            }
             chatBox.appendChild(msgDiv);
         });
     });
